@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{%- if page.lang == "en" -%}
+  {%- assign ko = false -%}
+  {%- assign base = "/en/" -%}
+  {%- assign alt_url = page.url | remove_first: "/en" -%}
+{%- else -%}
+  {%- assign ko = true -%}
+  {%- assign base = "/" -%}
+  {%- assign alt_url = page.url | prepend: "/en" -%}
+{%- endif -%}
+<html lang="{% if ko %}ko{% else %}en{% endif %}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.ref == "home" %}PHM in Practice{% else %}{{ page.title }} | PHM in Practice{% endif %}</title>
+<meta name="description" content="{{ page.subtitle | default: site.description | escape }}">
+<meta name="theme-color" content="#142c40">
+<link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+<a class="skip" href="#main">{% if ko %}본문으로 바로가기{% else %}Skip to content{% endif %}</a>
+<header class="top"><div class="wrap top-inner">
+  <a class="brand" href="{{ base | relative_url }}">PHM <span>in Practice</span></a>
+  <div class="nav-area">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="{{ base | relative_url }}"{% if page.ref == "home" %} aria-current="page"{% endif %}>{% if ko %}홈{% else %}Home{% endif %}</a>
+      <a href="{{ base | append: 'examples/' | relative_url }}"{% if page.ref == "examples" %} aria-current="page"{% endif %}>PHM Examples</a>
+      <a href="{{ base | append: 'about/' | relative_url }}"{% if page.ref == "about" %} aria-current="page"{% endif %}>About Us</a>
+    </nav>
+    <nav class="languages" aria-label="Language">
+      {%- if ko -%}
+      <a href="{{ page.url | relative_url }}" lang="ko" aria-current="true">한국어</a><a href="{{ alt_url | relative_url }}" lang="en">English</a>
+      {%- else -%}
+      <a href="{{ alt_url | relative_url }}" lang="ko">한국어</a><a href="{{ page.url | relative_url }}" lang="en" aria-current="true">English</a>
+      {%- endif -%}
+    </nav>
+  </div>
+</div></header>
+<main id="main" tabindex="-1">
+  <div class="hero"><div class="wrap">
+    <h1>{{ page.title }}</h1>
+    {%- if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+  </div></div>
+  <div class="wrap content"><div class="prose">
+{{ content }}
+  </div></div>
+</main>
+<footer class="footer"><div class="wrap footer-inner">
+  <span>PHM in Practice</span>
+  <a href="#main">{% if ko %}맨 위로 ↑{% else %}Back to top ↑{% endif %}</a>
+</div></footer>
+<script>
+// Open links to other websites in a new tab; links inside this site stay in the same tab.
+document.querySelectorAll('.prose a[href^="http"]').forEach(function (a) {
+  if (a.hostname !== location.hostname) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+});
+</script>
+</body>
+</html>

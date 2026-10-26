@@ -1,0 +1,13 @@
+title: PHM in Practice
+description: 실제 센서 데이터를 활용한 PHM 구현사례와 실습 코드
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+exclude:
+  - README.md
