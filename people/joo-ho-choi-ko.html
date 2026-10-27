@@ -79,6 +79,9 @@ html[data-local-editor] .editor-bar{display:block}
 html[data-editor-active] [data-editable]{outline:1px dashed #64a7ac;outline-offset:5px;cursor:text;min-height:1.5em}html[data-editor-active] [data-editable]:focus{outline:2px solid #126973;background:#12697308}html[data-editor-active] .hero [data-editable]:focus{background:#ffffff12}html[data-editor-active] section{scroll-margin-top:130px}
 @media(max-width:650px){.editor-bar{position:relative}.editor-help{flex-basis:100%}.editor-bar button{padding:8px 12px}}
 @media print{html[data-local-editor] .editor-bar{display:none}[data-editable]{outline:none!important}}
+
+/* No table of contents: single-column page */
+.layout{display:block}.article{max-width:900px}
 </style></head>
 <body id="top">
 <aside class="editor-bar" aria-label="화면 편집 도구" lang="ko">
@@ -91,7 +94,7 @@ html[data-editor-active] [data-editable]{outline:1px dashed #64a7ac;outline-offs
 <a class="skip" href="#main">본문으로 바로가기</a>
 <header class="top"><div class="wrap top-inner"><a class="brand" href="https://phm-in-practice.github.io/">PHM <span>in Practice</span></a><div class="nav-area"><nav class="nav" aria-label="Main navigation"><a href="https://phm-in-practice.github.io/">홈</a><a href="https://phm-in-practice.github.io/examples/">PHM Examples</a><a href="https://phm-in-practice.github.io/about/" aria-current="page">About Us</a></nav><nav class="languages" aria-label="Language"><a href="joo-ho-choi-ko.html" lang="ko" aria-current="true">한국어</a><a href="joo-ho-choi-en.html" lang="en">English</a></nav></div></div></header>
 <main id="main" tabindex="-1"><div class="hero"><div class="wrap hero-inner"><div><p class="eyebrow">저자 소개</p><h1>최주호</h1><p class="subtitle">명예교수</p><p class="affiliation">한국항공대학교</p><div class="hero-links"><a href="mailto:jhchoi@kau.ac.kr">jhchoi@kau.ac.kr</a><a href="https://scholar.google.co.kr/citations?hl=en&amp;user=A__XDvEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></div></div><img class="portrait" src="joo-ho-choi/photo01.jpg" width="700" height="895" alt="최주호 교수 사진"></div></div>
-<div class="wrap layout"><nav class="contents" aria-label="페이지 목차"><strong>목차</strong><a href="#profile">소개</a><a href="#contributions">PHM 학술공동체 활동</a><a href="#books">저서 및 교육자료</a><a href="#research">주요 연구사례</a><a href="#industry">산업 협력 및 자문</a><a href="#teaching">교육 및 초청강연</a><a href="#contact">연락처</a></nav><div class="article">
+<div class="wrap layout"><div class="article">
 <section id="profile"><h2>소개</h2><p>최주호는 한국항공대학교 명예교수로, 지난 20여 년간 건전성예측관리(Prognostics and Health Management, PHM)를 연구해 왔다. 설비의 열화 거동을 이해하고, 고장을 진단하며, 잔여수명을 예측하여 정비 의사결정을 지원하는 연구를 수행해 왔다.</p><p>연구와 함께 저서 집필, 실습 교육, 초청강연 및 산업 협력을 통해 엔지니어, 연구자와 학생들이 PHM을 이해하고 활용할 수 있도록 교육과 보급에 힘써 왔다.</p></section>
 <section id="contributions"><h2>PHM 학술공동체에 대한 기여</h2><p>최초의 아시아·태평양 PHM 학술대회(PHMAP) 개최를 주도하였으며, 2018년 한국PHM학회 설립에 기여하였다. PHM 분야에 대한 공로를 인정받아 미국 PHM Society의 Fellow로 선정되었다.</p></section>
 <section id="books"><h2>저서 및 교육자료</h2><div class="book-layout"><figure><img class="book-cover" src="joo-ho-choi/photo02.jpg" width="981" height="1501" alt="Prognostics and Health Management of Engineering Systems: An Introduction 책 표지"><figcaption>Springer · 2017</figcaption></figure><div><p>김남호, 안다운과 함께 <em>Prognostics and Health Management (PHM) of Engineering Systems: An Introduction</em>을 공동 집필하였으며, 이 책은 2017년 Springer에서 출판되었다.</p><p>김남호 · 안다운 · 최주호</p></div></div>
