@@ -1,0 +1,91 @@
+#dataset-catalog {
+  box-sizing: border-box;
+  width: min(96vw, 82rem);
+  max-height: 92vh;
+  max-height: 92dvh;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #bed0da;
+  border-radius: .6rem;
+  background: #fff;
+  color: #142c40;
+  overflow: hidden;
+}
+#dataset-catalog[open] {
+  display: flex;
+  flex-direction: column;
+}
+#dataset-catalog::backdrop {
+  background: rgb(12 32 48 / 62%);
+}
+#dataset-catalog .catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  padding: 1rem;
+  background: #142c40;
+  color: #fff;
+}
+#dataset-catalog h2 {
+  margin: 0;
+  color: inherit;
+  font-size: 1.25rem;
+}
+#dataset-catalog .catalog-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+#dataset-catalog form {
+  margin: 0;
+}
+#dataset-catalog .catalog-actions a {
+  color: inherit;
+}
+#dataset-catalog button {
+  padding: .35rem .7rem;
+  font: inherit;
+  cursor: pointer;
+}
+#dataset-catalog .catalog-status {
+  margin: 0;
+  padding: .45rem 1rem;
+}
+#dataset-catalog .catalog-status:empty {
+  display: none;
+}
+#dataset-catalog .catalog-content {
+  overflow: auto;
+  min-height: 0;
+}
+#dataset-catalog table {
+  width: max-content;
+  margin: 0;
+  border-spacing: 0;
+  border-collapse: separate;
+  font-size: .9rem;
+  text-align: left;
+}
+#dataset-catalog :is(th, td) {
+  box-sizing: border-box;
+  min-width: 9rem;
+  max-width: 22rem;
+  padding: .55rem .65rem;
+  border-right: 1px solid #d6e0e6;
+  border-bottom: 1px solid #d6e0e6;
+  vertical-align: top;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#dataset-catalog th {
+  position: sticky;
+  top: 0;
+  background: #0e6173;
+  color: #fff;
+}
+#dataset-catalog tbody tr:nth-child(even) {
+  background: #eef5f8;
+}

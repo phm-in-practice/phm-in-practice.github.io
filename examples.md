@@ -9,9 +9,26 @@ subtitle: PHM 구현사례
 
 이곳에서는 교재에서 다루지 않은 PHM 구현사례를 소개한다.
 
-세계 각국의 연구기관과 기업은 여러 산업 분야의 설비와 부품에서 수집한 데이터를 PHM 등 관련 연구에 활용할 수 있도록 공개하고 있다. 이러한 데이터세트는 여러 공개 데이터 저장소에서 찾아볼 수 있다. 데이터세트별 적용 산업, 대상 설비·부품, 제공처는 [공개 데이터세트 목록(Excel)](/assets/data/PHM_Industrial_Open_Datasets-ko.xlsx)에서 확인할 수 있다. 본 사이트에서는 이 가운데 이상감지, 고장진단, 잔여수명 예측 등 PHM 적용 목적에 맞는 데이터세트를 선별해 구현사례를 소개한다.
+세계 각국의 연구기관과 기업은 여러 산업 분야의 설비와 부품에서 수집한 데이터를 PHM 등 관련 연구에 활용할 수 있도록 공개하고 있다. 이러한 데이터세트는 여러 공개 데이터 저장소에서 찾아볼 수 있다. 데이터세트별 적용 산업, 대상 설비·부품, 제공처는 <a href="/assets/data/PHM_Industrial_Open_Datasets-ko.xlsx" data-dataset-catalog>공개 데이터세트 목록</a>에서 확인할 수 있다. 본 사이트에서는 이 가운데 이상감지, 고장진단, 잔여수명 예측 등 PHM 적용 목적에 맞는 데이터세트를 선별해 구현사례를 소개한다.
 
 관련 실습 노트북과 데이터세트는 교재에서 안내한 주소와 동일한 [tinyurl.com/phm-practice](https://tinyurl.com/phm-practice)에서 제공한다.
+
+<div>
+<link rel="stylesheet" href="/assets/css/dataset-catalog.css">
+<dialog id="dataset-catalog" aria-labelledby="dataset-catalog-title" data-sheet="데이터 목록" data-loading="목록을 불러오는 중입니다." data-error="목록을 불러올 수 없습니다. Excel 파일을 내려받아 확인하세요.">
+  <header class="catalog-header">
+    <h2 id="dataset-catalog-title">공개 데이터세트 목록</h2>
+    <div class="catalog-actions">
+      <a href="/assets/data/PHM_Industrial_Open_Datasets-ko.xlsx" download>Excel 다운로드</a>
+      <form method="dialog"><button autofocus>닫기</button></form>
+    </div>
+  </header>
+  <p class="catalog-status" role="status"></p>
+  <div class="catalog-content" tabindex="0" role="region" aria-labelledby="dataset-catalog-title" hidden></div>
+</dialog>
+<script defer src="/assets/js/xlsx-0.20.3.min.js"></script>
+<script defer src="/assets/js/dataset-catalog.js"></script>
+</div>
 
 ## [터빈발전기 윤활시스템 이상감지 및 건전성진단](/cases/A01_TGLS_ko.html)
 
