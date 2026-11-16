@@ -7,7 +7,11 @@ subtitle: PHM 구현사례
 ---
 <!-- 새 사례 추가: 사례 HTML 파일을 cases 폴더에 올린 뒤, 맨 아래에 "## [사례 제목](/cases/파일이름.html)" 한 줄과 설명 문단을 추가하면 됩니다. -->
 
-이곳에서는 교재에서 다루지 않은 PHM 구현사례를 소개한다. 관련 실습 노트북과 데이터세트는 교재에서 안내한 주소와 동일한 [tinyurl.com/phm-practice](https://tinyurl.com/phm-practice)에서 제공한다.
+이곳에서는 교재에서 다루지 않은 PHM 구현사례를 소개한다.
+
+세계 각국의 연구기관과 기업은 여러 산업 분야의 설비와 부품에서 수집한 데이터를 PHM 등 관련 연구에 활용할 수 있도록 공개하고 있다. 이러한 데이터세트는 여러 공개 데이터 저장소에서 찾아볼 수 있다. 데이터세트별 적용 산업, 대상 설비·부품, 제공처는 [공개 데이터세트 목록(Excel)](/assets/data/PHM_Industrial_Open_Datasets-ko.xlsx)에서 확인할 수 있다. 본 사이트에서는 이 가운데 이상감지, 고장진단, 잔여수명 예측 등 PHM 적용 목적에 맞는 데이터세트를 선별해 구현사례를 소개한다.
+
+관련 실습 노트북과 데이터세트는 교재에서 안내한 주소와 동일한 [tinyurl.com/phm-practice](https://tinyurl.com/phm-practice)에서 제공한다.
 
 ## [터빈발전기 윤활시스템 이상감지 및 건전성진단](/cases/A01_TGLS_ko.html)
 
