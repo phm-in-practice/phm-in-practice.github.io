@@ -6,7 +6,18 @@
   const content = dialog.querySelector('.catalog-content');
   const status = dialog.querySelector('.catalog-status');
   let loading = false;
-  let loaded = false;
+  let workbook;
+  const catalogName = dialog.dataset.sheet;
+  const english = catalogName === 'Dataset Catalog';
+  const candidateName = english ? 'Representative Cases' : '대표 구현 후보';
+
+  const controls = document.createElement('div');
+  controls.style.cssText = 'display:flex; flex-wrap:wrap; gap:.5rem; padding:.45rem 1rem';
+  controls.setAttribute('role', 'group');
+  controls.setAttribute('aria-label', english ? 'Dataset lists' : '데이터세트 목록 전환');
+  status.before(controls);
+  controls.style.display = 'none';
+  const buttons = [];
 
   function addCells(row, values, tag, source, startColumn, sourceRow) {
     values.forEach((value, column) => {
@@ -28,68 +39,73 @@
     });
   }
 
-    const catalogName = dialog.dataset.sheet;
-  const isEnglish = catalogName === 'Dataset Catalog';
-  const candidateName = isEnglish ? 'Representative Cases' : '대표 구현 후보';
-  let workbook;
-
-  const controls = document.createElement('div');
-  controls.style.padding = '0.45rem 1rem';
-  controls.hidden = true;
-  status.before(controls);
-
-  const buttons = new Map();
-  for (const [name, label] of [
-    [catalogName, isEnglish ? 'Dataset Catalog' : '데이터 목록'],
-    [candidateName, candidateName],
-  ]) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.textContent = label;
-    button.style.marginRight = '0.5rem';
-    button.addEventListener('click', () => renderSheet(name));
-    controls.appendChild(button);
-    buttons.set(name, button);
-  }
-
   function renderSheet(name) {
     const sheet = workbook.Sheets[name];
+    if (!sheet?.['!ref']) throw new Error('Worksheet missing');
     const range = XLSX.utils.decode_range(sheet['!ref']);
+    if (range.e.r < 3) throw new Error('Column headings missing');
     range.s.r = 3;
     const [headers, ...rows] = XLSX.utils.sheet_to_json(sheet, {
       header: 1,
       defval: '',
       raw: false,
+      blankrows: true,
       range: XLSX.utils.encode_range(range),
     });
+    if (!headers?.some(Boolean)) throw new Error('Column headings missing');
 
     const table = document.createElement('table');
     addCells(table.createTHead().insertRow(), headers, 'th', sheet, range.s.c, 3);
     const body = table.createTBody();
     rows.forEach((values, index) => {
-      if (values[2]) {
+      if (values[2]?.trim()) {
         addCells(body.insertRow(), values, 'td', sheet, range.s.c, index + 4);
       }
     });
+    if (!body.rows.length) {
+      const cell = body.insertRow().insertCell();
+      cell.colSpan = headers.length;
+      cell.textContent = english ? 'No datasets to display.' : '표시할 데이터세트가 없습니다.';
+    }
 
     content.replaceChildren(table);
     content.hidden = false;
     content.scrollTop = 0;
     content.scrollLeft = 0;
+    const dateCell = sheet.A3 ?? workbook.Sheets[catalogName].A3;
+    status.textContent = dateCell?.w || dateCell?.v || '';
 
     for (const [sheetName, button] of buttons) {
-      const selected = sheetName === name;
-      button.setAttribute('aria-pressed', String(selected));
-      button.style.fontWeight = selected ? 'bold' : 'normal';
-      button.style.textDecoration = selected ? 'underline' : 'none';
+      const active = sheetName === name;
+      button.setAttribute('aria-pressed', String(active));
+      button.style.fontWeight = active ? 'bold' : 'normal';
+      button.style.textDecoration = active ? 'underline' : 'none';
     }
+  }
+
+  for (const [name, label] of [
+    [catalogName, english ? 'Dataset Catalog' : '데이터 목록'],
+    [candidateName, candidateName],
+  ]) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = label;
+    button.addEventListener('click', () => {
+      try {
+        renderSheet(name);
+      } catch {
+        status.textContent = dialog.dataset.error;
+      }
+    });
+    controls.appendChild(button);
+    buttons.push([name, button]);
   }
 
   link.addEventListener('click', async (event) => {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     dialog.showModal();
-    if (loading || loaded) return;
+    if (loading || workbook) return;
 
     loading = true;
     status.textContent = dialog.dataset.loading;
@@ -97,16 +113,11 @@
       const response = await fetch(link.href);
       if (!response.ok) throw new Error('Workbook download failed');
       workbook = XLSX.read(await response.arrayBuffer());
-
-      const catalog = workbook.Sheets[catalogName];
-      if (!catalog?.['!ref']) throw new Error('Catalog worksheet missing');
-
-      buttons.get(candidateName).disabled = !workbook.Sheets[candidateName]?.['!ref'];
+      buttons[1][1].disabled = !workbook.Sheets[candidateName]?.['!ref'];
       renderSheet(catalogName);
-      controls.hidden = false;
-      status.textContent = catalog.A3?.w || catalog.A3?.v || '';
-      loaded = true;
+      controls.style.display = 'flex';
     } catch {
+      workbook = undefined;
       status.textContent = dialog.dataset.error;
     } finally {
       loading = false;
